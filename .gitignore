@@ -1,0 +1,7 @@
+*.pro.user*
+*.Debug
+*.Release
+*.o
+*.bin
+/Debug/
+/release/
