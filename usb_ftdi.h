@@ -25,6 +25,8 @@ public:
     unsigned long getStatusBuffer();
 
     void run();
+    virtual void threadCycle();
+    void startThread();
 
 signals:
     void receive();

@@ -6,12 +6,16 @@ USB_FTDI::USB_FTDI(bool need_thread, unsigned long ms)
 {
     handle = NULL;
 
-    if (need_thread) {
-        thread_on = true;
-        msecs = ms;
-        this->start();
-    }
+    msecs = ms;
 
+    if (need_thread) startThread();
+
+}
+
+void USB_FTDI::startThread()
+{
+    thread_on = true;
+    this->start();
 }
 
 USB_FTDI::~USB_FTDI()
@@ -27,11 +31,17 @@ void USB_FTDI::run()
 {
     while(thread_on) {
         if (isOpen()) {
-            if (getStatusBuffer()) emit receive();
+            threadCycle();
         }
         msleep(msecs);
     }
     qDebug() << "End Thread!";
+}
+
+void USB_FTDI::threadCycle()
+{
+    qDebug() << "Hello class FTDI!";
+    if (getStatusBuffer()) emit receive();
 }
 
 bool USB_FTDI::isOpen(void)
