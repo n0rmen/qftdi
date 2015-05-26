@@ -18,9 +18,9 @@ public:
     static quint32 getVersion();
 
     bool isSequential() {return true;}
-    bool open(OpenMode mode);
+    virtual bool open(OpenMode mode);
     bool open(qint32 numdev, OpenMode mode, qint32 baudrate = 0);
-    void close();
+    virtual void close();
 
     qint64 bytesAvailable() const;
 
